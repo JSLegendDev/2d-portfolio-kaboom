@@ -18,55 +18,75 @@ const player = k.add([
   k.anchor("center"),
   k.pos(k.center()),
   k.scale(scaleFactor),
-  { speed: 400 },
+  { speed: 400, activeAxis: "vertical" },
 ]);
 
-k.onResize(() => {
+const horizontalZone = player.add([
+  k.rect(k.width(), 16),
+  k.pos(-k.width() / 2, -8),
+  k.area(),
+  k.opacity(0),
+]);
+
+horizontalZone.onClick(() => {
+  player.activeAxis = "horizontal";
+});
+
+function setCamScale(k) {
   const resizeFactor = k.width() / k.height();
   if (resizeFactor < 1) {
     k.camScale(k.vec2(1.5));
   } else {
     k.camScale(1);
   }
+}
+
+setCamScale(k);
+
+k.onResize(() => {
+  horizontalZone.width = k.width();
+  horizontalZone.pos.x = -k.width() / 2;
+  setCamScale(k);
 });
 
 k.onUpdate(() => {
-  k.camPos(player.pos);
+  k.camPos(player.pos.x, player.pos.y - 100);
 });
 
 k.onMouseDown(() => {
   const mouseDirectionX = k.mousePos().x - k.width() / 2 > 0 ? "right" : "left";
   const mouseDirectionY = k.mousePos().y - k.height() / 2 > 0 ? "down" : "up";
-  const activeAxis =
-    k.mousePos().y < player.pos.y + 100 && k.mousePos().y > player.pos.y - 100
-      ? "horizontal"
-      : "vertical";
 
   if (player.curAnim() !== "walk-down") {
     player.play("walk-down");
   }
 
-  if (mouseDirectionX === "left" && activeAxis === "horizontal") {
-    player.move(-player.speed, 0);
-    return;
+  if (player.activeAxis === "horizontal") {
+    if (mouseDirectionX === "left") {
+      player.move(-player.speed, 0);
+      return;
+    }
+
+    if (mouseDirectionX === "right") {
+      player.move(player.speed, 0);
+      return;
+    }
   }
 
-  if (mouseDirectionX === "right" && activeAxis === "horizontal") {
-    player.move(player.speed, 0);
-    return;
-  }
+  if (player.activeAxis === "vertical") {
+    if (mouseDirectionY === "up") {
+      player.move(0, -player.speed);
+      return;
+    }
 
-  if (mouseDirectionY === "up" && activeAxis === "vertical") {
-    player.move(0, -player.speed);
-    return;
-  }
-
-  if (mouseDirectionY === "down" && activeAxis === "vertical") {
-    player.move(0, player.speed);
-    return;
+    if (mouseDirectionY === "down") {
+      player.move(0, player.speed);
+      return;
+    }
   }
 });
 
 k.onMouseRelease(() => {
   player.play("idle-down");
+  player.activeAxis = "vertical";
 });
