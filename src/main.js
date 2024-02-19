@@ -10,6 +10,10 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   },
 });
 
+k.onUpdate(() => {
+  k.debug.log(k.debug.fps());
+});
+
 k.add([k.rect(100, 100), k.pos(k.center().x, k.center().y)]);
 
 const player = k.add([
@@ -44,7 +48,7 @@ rightZone.onClick(() => {
 });
 
 const topZone = player.add([
-  k.rect(k.width(), 300),
+  k.rect(16, 300),
   k.pos(0, -158),
   k.area(),
   k.anchor("center"),
@@ -55,8 +59,19 @@ topZone.onClick(() => {
   player.direction = "up";
 });
 
+const topDiagonalRight = player.add([
+  k.rect(k.width() / 2, 300),
+  k.pos(10, -10),
+  k.rotate(270),
+  k.area(),
+]);
+
+topDiagonalRight.onClick(() => {
+  player.direction = "diagonal-right";
+});
+
 const bottomZone = player.add([
-  k.rect(k.width(), 300),
+  k.rect(16, 300),
   k.pos(0, 158),
   k.area(),
   k.anchor("center"),
@@ -82,8 +97,6 @@ k.onResize(() => {
   leftZone.width = k.width() / 2;
   leftZone.pos.x = -k.width() / 2;
   rightZone.width = k.width() / 2;
-  topZone.width = k.width();
-  bottomZone.width = k.width();
   setCamScale(k);
 });
 
@@ -95,25 +108,25 @@ k.onMouseDown(() => {
   if (player.curAnim() !== "walk-down") {
     player.play("walk-down");
   }
-
   if (player.direction === "left") {
     player.move(-player.speed, 0);
     return;
   }
-
   if (player.direction === "right") {
     player.move(player.speed, 0);
     return;
   }
-
   if (player.direction === "up") {
     player.move(0, -player.speed);
     return;
   }
-
   if (player.direction === "down") {
     player.move(0, player.speed);
     return;
+  }
+
+  if (player.direction === "diagonal-right") {
+    player.move(player.speed / 2, -player.speed / 2);
   }
 });
 
