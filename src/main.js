@@ -7,11 +7,11 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   anims: {
     "idle-down": 936,
     "walk-down": { from: 936, to: 939, loop: true, speed: 8 },
+    "idle-side": 975,
+    "walk-side": { from: 975, to: 978, loop: true, speed: 8 },
+    "idle-up": 1014,
+    "walk-up": { from: 1014, to: 1017, loop: true, speed: 8 },
   },
-});
-
-k.onUpdate(() => {
-  k.debug.log(k.debug.fps());
 });
 
 k.add([k.rect(100, 100), k.pos(k.center().x, k.center().y)]);
@@ -35,7 +35,7 @@ const leftZone = player.add([
   "controlZone",
 ]);
 
-leftZone.onClick(() => {
+leftZone.onHover(() => {
   player.direction = "left";
 });
 
@@ -48,7 +48,7 @@ const rightZone = player.add([
   "controlZone",
 ]);
 
-rightZone.onClick(() => {
+rightZone.onHover(() => {
   player.direction = "right";
 });
 
@@ -62,7 +62,7 @@ const topZone = player.add([
   "controlZone",
 ]);
 
-topZone.onClick(() => {
+topZone.onHover(() => {
   player.direction = "up";
 });
 
@@ -76,7 +76,7 @@ const topDiagonalRight = player.add([
   "controlZone",
 ]);
 
-topDiagonalRight.onClick(() => {
+topDiagonalRight.onHover(() => {
   player.direction = "diagonal-top-right";
 });
 
@@ -90,7 +90,7 @@ const topDiagonalLeft = player.add([
   "controlZone",
 ]);
 
-topDiagonalLeft.onClick(() => {
+topDiagonalLeft.onHover(() => {
   player.direction = "diagonal-top-left";
 });
 
@@ -104,7 +104,7 @@ const bottomDiagonalLeft = player.add([
   "controlZone",
 ]);
 
-bottomDiagonalLeft.onClick(() => {
+bottomDiagonalLeft.onHover(() => {
   player.direction = "diagonal-bottom-left";
 });
 
@@ -118,7 +118,7 @@ const bottomDiagonalRight = player.add([
   "controlZone",
 ]);
 
-bottomDiagonalRight.onClick(() => {
+bottomDiagonalRight.onHover(() => {
   player.direction = "diagonal-bottom-right";
 });
 
@@ -132,7 +132,7 @@ const bottomZone = player.add([
   "controlZone",
 ]);
 
-bottomZone.onClick(() => {
+bottomZone.onHover(() => {
   player.direction = "down";
 });
 
@@ -159,47 +159,83 @@ k.onUpdate(() => {
 });
 
 k.onMouseDown(() => {
-  if (player.curAnim() !== "walk-down") {
-    player.play("walk-down");
-  }
   if (player.direction === "left") {
+    if (player.curAnim() !== "walk-side") {
+      player.flipX = true;
+      player.play("walk-side");
+    }
     player.move(-player.speed, 0);
     return;
   }
   if (player.direction === "right") {
+    if (player.curAnim() !== "walk-side") {
+      player.flipX = false;
+      player.play("walk-side");
+    }
     player.move(player.speed, 0);
     return;
   }
   if (player.direction === "up") {
+    if (player.curAnim() !== "walk-up") {
+      player.play("walk-up");
+    }
     player.move(0, -player.speed);
     return;
   }
   if (player.direction === "down") {
+    if (player.curAnim() !== "walk-down") {
+      player.play("walk-down");
+    }
     player.move(0, player.speed);
     return;
   }
 
   if (player.direction === "diagonal-top-right") {
+    if (player.curAnim() !== "walk-side") {
+      player.flipX = false;
+      player.play("walk-side");
+    }
     player.move(player.speed / 2, -player.speed / 2);
     return;
   }
 
   if (player.direction === "diagonal-top-left") {
+    if (player.curAnim() !== "walk-side") {
+      player.flipX = true;
+      player.play("walk-side");
+    }
     player.move(-player.speed / 2, -player.speed / 2);
     return;
   }
 
   if (player.direction === "diagonal-bottom-left") {
+    if (player.curAnim() !== "walk-side") {
+      player.flipX = true;
+      player.play("walk-side");
+    }
     player.move(-player.speed / 2, player.speed / 2);
     return;
   }
 
   if (player.direction === "diagonal-bottom-right") {
+    if (player.curAnim() !== "walk-side") {
+      player.flipX = false;
+      player.play("walk-side");
+    }
     player.move(player.speed / 2, player.speed / 2);
     return;
   }
 });
 
 k.onMouseRelease(() => {
-  player.play("idle-down");
+  if (player.direction === "down") {
+    player.play("idle-down");
+    return;
+  }
+  if (player.direction === "up") {
+    player.play("idle-up");
+    return;
+  }
+
+  player.play("idle-side");
 });
