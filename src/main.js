@@ -18,18 +18,19 @@ k.add([k.rect(100, 100), k.pos(k.center().x, k.center().y)]);
 
 const player = k.add([
   k.sprite("spritesheet", { anim: "idle-down" }),
-  k.area(),
+  k.area({ collisionIgnore: ["controlZone"] }),
   k.anchor("center"),
   k.pos(k.center()),
   k.scale(scaleFactor),
   { speed: 400, direction: "down" },
+  "player",
 ]);
 
 const leftZone = player.add([
   k.pos(-k.width() / 2, -8),
   k.area({
     shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
-    collisionIgnore: ["controlZone"],
+    collisionIgnore: ["controlZone", "player"],
   }),
   "controlZone",
 ]);
@@ -42,7 +43,7 @@ const rightZone = player.add([
   k.pos(0, -8),
   k.area({
     shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
-    collisionIgnore: ["controlZone"],
+    collisionIgnore: ["controlZone", "player"],
   }),
   "controlZone",
 ]);
@@ -55,7 +56,7 @@ const topZone = player.add([
   k.pos(0, -158),
   k.area({
     shape: new k.Rect(k.vec2(0), 16, 300),
-    collisionIgnore: ["controlZone"],
+    collisionIgnore: ["controlZone", "player"],
   }),
   k.anchor("center"),
   "controlZone",
@@ -66,11 +67,12 @@ topZone.onClick(() => {
 });
 
 const topDiagonalRight = player.add([
-  k.rect(k.width() / 2, 300),
   k.pos(10, -10),
   k.rotate(270),
-  k.area(),
-  k.opacity(0),
+  k.area({
+    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+    collisionIgnore: ["controlZone", "player"],
+  }),
   "controlZone",
 ]);
 
@@ -79,11 +81,12 @@ topDiagonalRight.onClick(() => {
 });
 
 const topDiagonalLeft = player.add([
-  k.rect(k.width() / 2, 300),
   k.pos(-10, -10),
   k.rotate(180),
-  k.area(),
-  k.opacity(0),
+  k.area({
+    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+    collisionIgnore: ["controlZone", "player"],
+  }),
   "controlZone",
 ]);
 
@@ -92,11 +95,12 @@ topDiagonalLeft.onClick(() => {
 });
 
 const bottomDiagonalLeft = player.add([
-  k.rect(k.width() / 2, 300),
   k.pos(-10, 10),
   k.rotate(90),
-  k.area(),
-  k.opacity(0),
+  k.area({
+    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+    collisionIgnore: ["controlZone", "player"],
+  }),
   "controlZone",
 ]);
 
@@ -105,11 +109,12 @@ bottomDiagonalLeft.onClick(() => {
 });
 
 const bottomDiagonalRight = player.add([
-  k.rect(k.width() / 2, 300),
   k.pos(10, 10),
   k.rotate(0),
-  k.area(),
-  k.opacity(0),
+  k.area({
+    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+    collisionIgnore: ["controlZone", "player"],
+  }),
   "controlZone",
 ]);
 
@@ -118,11 +123,12 @@ bottomDiagonalRight.onClick(() => {
 });
 
 const bottomZone = player.add([
-  k.rect(16, 300),
   k.pos(0, 158),
-  k.area(),
+  k.area({
+    shape: new k.Rect(k.vec2(0), 16, 300),
+    collisionIgnore: ["controlZone", "player"],
+  }),
   k.anchor("center"),
-  k.opacity(0),
   "controlZone",
 ]);
 
