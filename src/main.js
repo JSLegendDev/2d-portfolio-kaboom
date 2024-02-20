@@ -26,10 +26,12 @@ const player = k.add([
 ]);
 
 const leftZone = player.add([
-  k.rect(k.width() / 2, 16),
   k.pos(-k.width() / 2, -8),
-  k.area(),
-  k.opacity(0),
+  k.area({
+    shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
+    collisionIgnore: ["controlZone"],
+  }),
+  "controlZone",
 ]);
 
 leftZone.onClick(() => {
@@ -37,10 +39,12 @@ leftZone.onClick(() => {
 });
 
 const rightZone = player.add([
-  k.rect(k.width() / 2, 16),
   k.pos(0, -8),
-  k.area(),
-  k.opacity(0),
+  k.area({
+    shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
+    collisionIgnore: ["controlZone"],
+  }),
+  "controlZone",
 ]);
 
 rightZone.onClick(() => {
@@ -48,11 +52,13 @@ rightZone.onClick(() => {
 });
 
 const topZone = player.add([
-  k.rect(16, 300),
   k.pos(0, -158),
-  k.area(),
+  k.area({
+    shape: new k.Rect(k.vec2(0), 16, 300),
+    collisionIgnore: ["controlZone"],
+  }),
   k.anchor("center"),
-  k.opacity(0),
+  "controlZone",
 ]);
 
 topZone.onClick(() => {
@@ -64,10 +70,51 @@ const topDiagonalRight = player.add([
   k.pos(10, -10),
   k.rotate(270),
   k.area(),
+  k.opacity(0),
+  "controlZone",
 ]);
 
 topDiagonalRight.onClick(() => {
-  player.direction = "diagonal-right";
+  player.direction = "diagonal-top-right";
+});
+
+const topDiagonalLeft = player.add([
+  k.rect(k.width() / 2, 300),
+  k.pos(-10, -10),
+  k.rotate(180),
+  k.area(),
+  k.opacity(0),
+  "controlZone",
+]);
+
+topDiagonalLeft.onClick(() => {
+  player.direction = "diagonal-top-left";
+});
+
+const bottomDiagonalLeft = player.add([
+  k.rect(k.width() / 2, 300),
+  k.pos(-10, 10),
+  k.rotate(90),
+  k.area(),
+  k.opacity(0),
+  "controlZone",
+]);
+
+bottomDiagonalLeft.onClick(() => {
+  player.direction = "diagonal-bottom-left";
+});
+
+const bottomDiagonalRight = player.add([
+  k.rect(k.width() / 2, 300),
+  k.pos(10, 10),
+  k.rotate(0),
+  k.area(),
+  k.opacity(0),
+  "controlZone",
+]);
+
+bottomDiagonalRight.onClick(() => {
+  player.direction = "diagonal-bottom-right";
 });
 
 const bottomZone = player.add([
@@ -76,6 +123,7 @@ const bottomZone = player.add([
   k.area(),
   k.anchor("center"),
   k.opacity(0),
+  "controlZone",
 ]);
 
 bottomZone.onClick(() => {
@@ -94,9 +142,9 @@ function setCamScale(k) {
 setCamScale(k);
 
 k.onResize(() => {
-  leftZone.width = k.width() / 2;
+  leftZone.area.shape.width = k.width() / 2;
   leftZone.pos.x = -k.width() / 2;
-  rightZone.width = k.width() / 2;
+  rightZone.area.shape.width = k.width() / 2;
   setCamScale(k);
 });
 
@@ -125,8 +173,24 @@ k.onMouseDown(() => {
     return;
   }
 
-  if (player.direction === "diagonal-right") {
+  if (player.direction === "diagonal-top-right") {
     player.move(player.speed / 2, -player.speed / 2);
+    return;
+  }
+
+  if (player.direction === "diagonal-top-left") {
+    player.move(-player.speed / 2, -player.speed / 2);
+    return;
+  }
+
+  if (player.direction === "diagonal-bottom-left") {
+    player.move(-player.speed / 2, player.speed / 2);
+    return;
+  }
+
+  if (player.direction === "diagonal-bottom-right") {
+    player.move(player.speed / 2, player.speed / 2);
+    return;
   }
 });
 
