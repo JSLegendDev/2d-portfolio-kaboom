@@ -160,16 +160,16 @@ k.onUpdate(() => {
 
 k.onMouseDown(() => {
   if (player.direction === "left") {
+    player.flipX = true;
     if (player.curAnim() !== "walk-side") {
-      player.flipX = true;
       player.play("walk-side");
     }
     player.move(-player.speed, 0);
     return;
   }
   if (player.direction === "right") {
+    player.flipX = false;
     if (player.curAnim() !== "walk-side") {
-      player.flipX = false;
       player.play("walk-side");
     }
     player.move(player.speed, 0);
@@ -191,8 +191,8 @@ k.onMouseDown(() => {
   }
 
   if (player.direction === "diagonal-top-right") {
+    player.flipX = false;
     if (player.curAnim() !== "walk-side") {
-      player.flipX = false;
       player.play("walk-side");
     }
     player.move(player.speed / 2, -player.speed / 2);
@@ -200,8 +200,8 @@ k.onMouseDown(() => {
   }
 
   if (player.direction === "diagonal-top-left") {
+    player.flipX = true;
     if (player.curAnim() !== "walk-side") {
-      player.flipX = true;
       player.play("walk-side");
     }
     player.move(-player.speed / 2, -player.speed / 2);
@@ -209,8 +209,8 @@ k.onMouseDown(() => {
   }
 
   if (player.direction === "diagonal-bottom-left") {
+    player.flipX = true;
     if (player.curAnim() !== "walk-side") {
-      player.flipX = true;
       player.play("walk-side");
     }
     player.move(-player.speed / 2, player.speed / 2);
@@ -218,8 +218,8 @@ k.onMouseDown(() => {
   }
 
   if (player.direction === "diagonal-bottom-right") {
+    player.flipX = false;
     if (player.curAnim() !== "walk-side") {
-      player.flipX = false;
       player.play("walk-side");
     }
     player.move(player.speed / 2, player.speed / 2);
