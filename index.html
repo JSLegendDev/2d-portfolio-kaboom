@@ -8,6 +8,10 @@
   </head>
   <body>
     <style>
+      body {
+        font-family: "Sora", monospace;
+      }
+
       #app {
         width: 100%;
         height: 100%;
@@ -16,13 +20,38 @@
 
       #ui {
         position: absolute;
-        right: 10vw;
-        bottom: 1vh;
+        left: 10%;
+        right: 10%;
+        bottom: 2vh;
+      }
+
+      #textbox {
+        background: white;
+        border-radius: 3px;
+        outline-style: solid;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 1.5rem;
+        word-spacing: 0.2rem;
+        filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+      }
+
+      .dialogue {
+        margin: 0;
+        user-select: none;
       }
     </style>
     <div id="app">
       <div id="ui">
-        <p>Test</p>
+        <div id="textbox">
+          <p class="dialogue">
+            How are you doing? This text box is made using HTML and CSS and not
+            canvas!
+          </p>
+        </div>
       </div>
       <canvas id="game"></canvas>
     </div>
