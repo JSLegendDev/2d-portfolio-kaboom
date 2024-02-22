@@ -30,13 +30,14 @@ const player = k.add([
   k.anchor("center"),
   k.pos(k.center()),
   k.scale(scaleFactor),
-  { speed: 400, direction: "down" },
+  { speed: 400, direction: "down", isInDialogue: false },
   "player",
 ]);
 
 const dialogueManager = {};
 
 player.onCollide("npc", () => {
+  player.isInDialogue = true;
   const dialogueBox = document.getElementById("textbox");
   const dialogue = document.getElementById("dialogue");
 
@@ -51,6 +52,7 @@ player.onCollide("npc", () => {
     }
 
     clearInterval(dialogueManager.intervalRef);
+    player.isInDialogue = false;
   }, 10);
 });
 
@@ -195,6 +197,8 @@ k.onUpdate(() => {
 });
 
 k.onMouseDown(() => {
+  if (player.isInDialogue) return;
+
   if (player.direction === "left") {
     player.flipX = true;
     if (player.curAnim() !== "walk-side") {
