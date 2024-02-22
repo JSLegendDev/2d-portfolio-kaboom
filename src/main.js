@@ -38,11 +38,12 @@ const dialogueManager = {};
 
 player.onCollide("npc", () => {
   player.isInDialogue = true;
-  const dialogueBox = document.getElementById("textbox");
+  const dialogueUI = document.getElementById("textbox-ui");
   const dialogue = document.getElementById("dialogue");
 
-  dialogueBox.style.display = "block";
-  const text = "This is a test!\nIt's really cool!";
+  dialogueUI.style.display = "block";
+  const text =
+    "The text box you're currently reading is not rendered withing canvas!\nIt's made with html and css!";
   let index = 0;
   dialogueManager.intervalRef = setInterval(() => {
     if (index < text.length) {
@@ -57,9 +58,9 @@ player.onCollide("npc", () => {
 
 document.getElementById("close").addEventListener("click", () => {
   player.isInDialogue = false;
-  const dialogueBox = document.getElementById("textbox");
+  const dialogueUI = document.getElementById("textbox-ui");
   const dialogue = document.getElementById("dialogue");
-  dialogueBox.style.display = "none";
+  dialogueUI.style.display = "none";
   dialogue.innerText = "";
 });
 // player.onCollideEnd("npc", () => {
@@ -190,6 +191,19 @@ function setCamScale(k) {
   }
 }
 
+function setAnimToIdle() {
+  if (player.direction === "down") {
+    player.play("idle-down");
+    return;
+  }
+  if (player.direction === "up") {
+    player.play("idle-up");
+    return;
+  }
+
+  player.play("idle-side");
+}
+
 setCamScale(k);
 
 k.onResize(() => {
@@ -275,14 +289,5 @@ k.onMouseDown(() => {
 });
 
 k.onMouseRelease(() => {
-  if (player.direction === "down") {
-    player.play("idle-down");
-    return;
-  }
-  if (player.direction === "up") {
-    player.play("idle-up");
-    return;
-  }
-
-  player.play("idle-side");
+  setAnimToIdle();
 });

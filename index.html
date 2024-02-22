@@ -26,32 +26,48 @@
         left: 10%;
         right: 10%;
         bottom: 2vh;
-        min-width: 1vw;
-        height: 10vh;
+        min-height: 10vh;
         background: white;
         border-radius: 3px;
         outline-style: solid;
         padding: 1rem;
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         justify-content: flex-start;
         align-items: flex-start;
         font-size: 1.5rem;
         word-spacing: 0.2rem;
         filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
-        overflow: scroll;
+        /* overflow: auto; */
       }
 
       #dialogue {
         margin: 0;
         user-select: none;
       }
+
+      #close {
+        border-style: none;
+        border-radius: 3px;
+        padding: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .btn-container {
+        align-self: flex-end;
+        margin-top: 1rem;
+      }
     </style>
     <div id="app">
       <div id="ui">
-        <div id="textbox" style="display: none">
-          <p id="dialogue"></p>
-          <button id="close">Close</button>
+        <div id="textbox-ui" style="display: none">
+          <div id="textbox">
+            <p id="dialogue"></p>
+            <div class="btn-container">
+              <button id="close">Close</button>
+            </div>
+          </div>
         </div>
       </div>
       <canvas id="game"></canvas>
