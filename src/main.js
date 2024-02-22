@@ -14,17 +14,53 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   },
 });
 
-k.add([k.rect(100, 100), k.pos(k.center().x, k.center().y)]);
+k.add([
+  k.rect(50, 50),
+  k.pos(k.center().x, k.center().y - 100),
+  k.outline(3),
+  k.area(),
+  k.body({ isStatic: true }),
+  "npc",
+]);
 
 const player = k.add([
   k.sprite("spritesheet", { anim: "idle-down" }),
   k.area({ collisionIgnore: ["controlZone"] }),
+  k.body(),
   k.anchor("center"),
   k.pos(k.center()),
   k.scale(scaleFactor),
   { speed: 400, direction: "down" },
   "player",
 ]);
+
+const dialogueManager = {};
+
+player.onCollide("npc", () => {
+  const dialogueBox = document.getElementById("textbox");
+  const dialogue = document.getElementById("dialogue");
+
+  dialogueBox.style.display = "block";
+  const text = "This is a test!\nIt's really cool!";
+  let index = 0;
+  dialogueManager.intervalRef = setInterval(() => {
+    if (index < text.length) {
+      dialogue.innerHTML += text[index];
+      index++;
+      return;
+    }
+
+    clearInterval(dialogueManager.intervalRef);
+  }, 10);
+});
+
+player.onCollideEnd("npc", () => {
+  const dialogueBox = document.getElementById("textbox");
+  const dialogue = document.getElementById("dialogue");
+  dialogueBox.style.display = "none";
+  dialogue.innerText = "";
+  clearInterval(dialogueManager.intervalRef);
+});
 
 const leftZone = player.add([
   k.pos(-k.width() / 2, -8),

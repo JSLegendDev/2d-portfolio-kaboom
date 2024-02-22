@@ -19,13 +19,15 @@
       }
 
       #ui {
+      }
+
+      #textbox {
         position: absolute;
         left: 10%;
         right: 10%;
         bottom: 2vh;
-      }
-
-      #textbox {
+        min-width: 1vw;
+        height: 10vh;
         background: white;
         border-radius: 3px;
         outline-style: solid;
@@ -37,20 +39,18 @@
         font-size: 1.5rem;
         word-spacing: 0.2rem;
         filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+        overflow: scroll;
       }
 
-      .dialogue {
+      #dialogue {
         margin: 0;
         user-select: none;
       }
     </style>
     <div id="app">
       <div id="ui">
-        <div id="textbox">
-          <p class="dialogue">
-            How are you doing? This text box is made using HTML and CSS and not
-            canvas!
-          </p>
+        <div id="textbox" style="display: none">
+          <p id="dialogue"></p>
         </div>
       </div>
       <canvas id="game"></canvas>
