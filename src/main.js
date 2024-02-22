@@ -52,17 +52,24 @@ player.onCollide("npc", () => {
     }
 
     clearInterval(dialogueManager.intervalRef);
-    player.isInDialogue = false;
   }, 10);
 });
 
-player.onCollideEnd("npc", () => {
+document.getElementById("close").addEventListener("click", () => {
+  player.isInDialogue = false;
   const dialogueBox = document.getElementById("textbox");
   const dialogue = document.getElementById("dialogue");
   dialogueBox.style.display = "none";
   dialogue.innerText = "";
-  clearInterval(dialogueManager.intervalRef);
 });
+// player.onCollideEnd("npc", () => {
+//   k.debug.log("dialog over");
+//   const dialogueBox = document.getElementById("textbox");
+//   const dialogue = document.getElementById("dialogue");
+//   dialogueBox.style.display = "none";
+//   dialogue.innerText = "";
+//   clearInterval(dialogueManager.intervalRef);
+// });
 
 const leftZone = player.add([
   k.pos(-k.width() / 2, -8),
