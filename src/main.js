@@ -233,89 +233,19 @@ k.onMouseDown(() => {
     return;
   }
 
-  if (mouseAngle > 95 && player.curAnim() !== "walk-side") {
+  if (Math.abs(mouseAngle) > 95 && player.curAnim() !== "walk-side") {
     player.flipX = false;
     player.play("walk-side");
     player.direction = "right";
     return;
   }
 
-  // if (mouseAngle < 80 && player.curAnim() !== "walk-side") {
-  //   player.flipX = true;
-  //   player.play("walk-side");
-  //   player.direction = "left";
-  //   return;
-  // }
-
-  // if (mouseDist.x > 0 && mouseDist.y < 0 && player.curAnim() !== "walk-down") {
-  //   player.play("walk-down");
-  //   player.direction = "down";
-  //   return;
-  // }
-
-  // if (player.isInDialogue) return;
-  // if (player.direction === "left") {
-  //   player.flipX = true;
-  //   if (player.curAnim() !== "walk-side") {
-  //     player.play("walk-side");
-  //   }
-  //   player.move(-player.speed, 0);
-  //   return;
-  // }
-  // if (player.direction === "right") {
-  //   player.flipX = false;
-  //   if (player.curAnim() !== "walk-side") {
-  //     player.play("walk-side");
-  //   }
-  //   player.move(player.speed, 0);
-  //   return;
-  // }
-  // if (player.direction === "up") {
-  //   if (player.curAnim() !== "walk-up") {
-  //     player.play("walk-up");
-  //   }
-  //   player.move(0, -player.speed);
-  //   return;
-  // }
-  // if (player.direction === "down") {
-  //   if (player.curAnim() !== "walk-down") {
-  //     player.play("walk-down");
-  //   }
-  //   player.move(0, player.speed);
-  //   return;
-  // }
-  // if (player.direction === "diagonal-top-right") {
-  //   player.flipX = false;
-  //   if (player.curAnim() !== "walk-side") {
-  //     player.play("walk-side");
-  //   }
-  //   player.move(player.speed / 2, -player.speed / 2);
-  //   return;
-  // }
-  // if (player.direction === "diagonal-top-left") {
-  //   player.flipX = true;
-  //   if (player.curAnim() !== "walk-side") {
-  //     player.play("walk-side");
-  //   }
-  //   player.move(-player.speed / 2, -player.speed / 2);
-  //   return;
-  // }
-  // if (player.direction === "diagonal-bottom-left") {
-  //   player.flipX = true;
-  //   if (player.curAnim() !== "walk-side") {
-  //     player.play("walk-side");
-  //   }
-  //   player.move(-player.speed / 2, player.speed / 2);
-  //   return;
-  // }
-  // if (player.direction === "diagonal-bottom-right") {
-  //   player.flipX = false;
-  //   if (player.curAnim() !== "walk-side") {
-  //     player.play("walk-side");
-  //   }
-  //   player.move(player.speed / 2, player.speed / 2);
-  //   return;
-  // }
+  if (Math.abs(mouseAngle) < 80 && player.curAnim() !== "walk-side") {
+    player.flipX = true;
+    player.play("walk-side");
+    player.direction = "left";
+    return;
+  }
 });
 
 k.onMouseRelease(() => {
