@@ -37,6 +37,7 @@ const player = k.add([
 const dialogueManager = {};
 
 player.onCollide("npc", () => {
+  k.debug.log("collided");
   player.isInDialogue = true;
   const dialogueUI = document.getElementById("textbox-ui");
   const dialogue = document.getElementById("dialogue");
@@ -63,124 +64,116 @@ document.getElementById("close").addEventListener("click", () => {
   dialogueUI.style.display = "none";
   dialogue.innerText = "";
 });
-// player.onCollideEnd("npc", () => {
-//   k.debug.log("dialog over");
-//   const dialogueBox = document.getElementById("textbox");
-//   const dialogue = document.getElementById("dialogue");
-//   dialogueBox.style.display = "none";
-//   dialogue.innerText = "";
-//   clearInterval(dialogueManager.intervalRef);
+
+// const leftZone = player.add([
+//   k.pos(-k.width() / 2, -8),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   "controlZone",
+// ]);
+
+// leftZone.onHover(() => {
+//   player.direction = "left";
 // });
 
-const leftZone = player.add([
-  k.pos(-k.width() / 2, -8),
-  k.area({
-    shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  "controlZone",
-]);
+// const rightZone = player.add([
+//   k.pos(0, -8),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   "controlZone",
+// ]);
 
-leftZone.onHover(() => {
-  player.direction = "left";
-});
+// rightZone.onHover(() => {
+//   player.direction = "right";
+// });
 
-const rightZone = player.add([
-  k.pos(0, -8),
-  k.area({
-    shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  "controlZone",
-]);
+// const topZone = player.add([
+//   k.pos(0, -158),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), 16, 300),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   k.anchor("center"),
+//   "controlZone",
+// ]);
 
-rightZone.onHover(() => {
-  player.direction = "right";
-});
+// topZone.onHover(() => {
+//   player.direction = "up";
+// });
 
-const topZone = player.add([
-  k.pos(0, -158),
-  k.area({
-    shape: new k.Rect(k.vec2(0), 16, 300),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  k.anchor("center"),
-  "controlZone",
-]);
+// const topDiagonalRight = player.add([
+//   k.pos(10, -10),
+//   k.rotate(270),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   "controlZone",
+// ]);
 
-topZone.onHover(() => {
-  player.direction = "up";
-});
+// topDiagonalRight.onHover(() => {
+//   player.direction = "diagonal-top-right";
+// });
 
-const topDiagonalRight = player.add([
-  k.pos(10, -10),
-  k.rotate(270),
-  k.area({
-    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  "controlZone",
-]);
+// const topDiagonalLeft = player.add([
+//   k.pos(-10, -10),
+//   k.rotate(180),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   "controlZone",
+// ]);
 
-topDiagonalRight.onHover(() => {
-  player.direction = "diagonal-top-right";
-});
+// topDiagonalLeft.onHover(() => {
+//   player.direction = "diagonal-top-left";
+// });
 
-const topDiagonalLeft = player.add([
-  k.pos(-10, -10),
-  k.rotate(180),
-  k.area({
-    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  "controlZone",
-]);
+// const bottomDiagonalLeft = player.add([
+//   k.pos(-10, 10),
+//   k.rotate(90),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   "controlZone",
+// ]);
 
-topDiagonalLeft.onHover(() => {
-  player.direction = "diagonal-top-left";
-});
+// bottomDiagonalLeft.onHover(() => {
+//   player.direction = "diagonal-bottom-left";
+// });
 
-const bottomDiagonalLeft = player.add([
-  k.pos(-10, 10),
-  k.rotate(90),
-  k.area({
-    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  "controlZone",
-]);
+// const bottomDiagonalRight = player.add([
+//   k.pos(10, 10),
+//   k.rotate(0),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   "controlZone",
+// ]);
 
-bottomDiagonalLeft.onHover(() => {
-  player.direction = "diagonal-bottom-left";
-});
+// bottomDiagonalRight.onHover(() => {
+//   player.direction = "diagonal-bottom-right";
+// });
 
-const bottomDiagonalRight = player.add([
-  k.pos(10, 10),
-  k.rotate(0),
-  k.area({
-    shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  "controlZone",
-]);
+// const bottomZone = player.add([
+//   k.pos(0, 158),
+//   k.area({
+//     shape: new k.Rect(k.vec2(0), 16, 300),
+//     collisionIgnore: ["controlZone", "player"],
+//   }),
+//   k.anchor("center"),
+//   "controlZone",
+// ]);
 
-bottomDiagonalRight.onHover(() => {
-  player.direction = "diagonal-bottom-right";
-});
-
-const bottomZone = player.add([
-  k.pos(0, 158),
-  k.area({
-    shape: new k.Rect(k.vec2(0), 16, 300),
-    collisionIgnore: ["controlZone", "player"],
-  }),
-  k.anchor("center"),
-  "controlZone",
-]);
-
-bottomZone.onHover(() => {
-  player.direction = "down";
-});
+// bottomZone.onHover(() => {
+//   player.direction = "down";
+// });
 
 function setCamScale(k) {
   const resizeFactor = k.width() / k.height();
@@ -207,85 +200,122 @@ function setAnimToIdle() {
 setCamScale(k);
 
 k.onResize(() => {
-  leftZone.area.shape.width = k.width() / 2;
-  leftZone.pos.x = -k.width() / 2;
-  rightZone.area.shape.width = k.width() / 2;
   setCamScale(k);
 });
 
 k.onUpdate(() => {
   k.camPos(player.pos.x, player.pos.y - 100);
+  // k.debug.log(k.toWorld(k.mousePos()));
 });
 
 k.onMouseDown(() => {
   if (player.isInDialogue) return;
 
-  if (player.direction === "left") {
-    player.flipX = true;
-    if (player.curAnim() !== "walk-side") {
-      player.play("walk-side");
-    }
-    player.move(-player.speed, 0);
+  const worldMousePos = k.toWorld(k.mousePos());
+  player.moveTo(worldMousePos, player.speed);
+
+  const mouseAngle = player.pos.angle(worldMousePos);
+  k.debug.log(mouseAngle);
+
+  if (mouseAngle > 80 && mouseAngle < 95 && player.curAnim() !== "walk-up") {
+    player.play("walk-up");
+    player.direction = "up";
     return;
   }
-  if (player.direction === "right") {
+
+  if (
+    mouseAngle < -80 &&
+    mouseAngle > -95 &&
+    player.curAnim() !== "walk-down"
+  ) {
+    player.play("walk-down");
+    player.direction = "down";
+    return;
+  }
+
+  if (mouseAngle > 95 && player.curAnim() !== "walk-side") {
     player.flipX = false;
-    if (player.curAnim() !== "walk-side") {
-      player.play("walk-side");
-    }
-    player.move(player.speed, 0);
-    return;
-  }
-  if (player.direction === "up") {
-    if (player.curAnim() !== "walk-up") {
-      player.play("walk-up");
-    }
-    player.move(0, -player.speed);
-    return;
-  }
-  if (player.direction === "down") {
-    if (player.curAnim() !== "walk-down") {
-      player.play("walk-down");
-    }
-    player.move(0, player.speed);
+    player.play("walk-side");
+    player.direction = "right";
     return;
   }
 
-  if (player.direction === "diagonal-top-right") {
-    player.flipX = false;
-    if (player.curAnim() !== "walk-side") {
-      player.play("walk-side");
-    }
-    player.move(player.speed / 2, -player.speed / 2);
-    return;
-  }
+  // if (mouseAngle < 80 && player.curAnim() !== "walk-side") {
+  //   player.flipX = true;
+  //   player.play("walk-side");
+  //   player.direction = "left";
+  //   return;
+  // }
 
-  if (player.direction === "diagonal-top-left") {
-    player.flipX = true;
-    if (player.curAnim() !== "walk-side") {
-      player.play("walk-side");
-    }
-    player.move(-player.speed / 2, -player.speed / 2);
-    return;
-  }
+  // if (mouseDist.x > 0 && mouseDist.y < 0 && player.curAnim() !== "walk-down") {
+  //   player.play("walk-down");
+  //   player.direction = "down";
+  //   return;
+  // }
 
-  if (player.direction === "diagonal-bottom-left") {
-    player.flipX = true;
-    if (player.curAnim() !== "walk-side") {
-      player.play("walk-side");
-    }
-    player.move(-player.speed / 2, player.speed / 2);
-    return;
-  }
-
-  if (player.direction === "diagonal-bottom-right") {
-    player.flipX = false;
-    if (player.curAnim() !== "walk-side") {
-      player.play("walk-side");
-    }
-    player.move(player.speed / 2, player.speed / 2);
-    return;
-  }
+  // if (player.isInDialogue) return;
+  // if (player.direction === "left") {
+  //   player.flipX = true;
+  //   if (player.curAnim() !== "walk-side") {
+  //     player.play("walk-side");
+  //   }
+  //   player.move(-player.speed, 0);
+  //   return;
+  // }
+  // if (player.direction === "right") {
+  //   player.flipX = false;
+  //   if (player.curAnim() !== "walk-side") {
+  //     player.play("walk-side");
+  //   }
+  //   player.move(player.speed, 0);
+  //   return;
+  // }
+  // if (player.direction === "up") {
+  //   if (player.curAnim() !== "walk-up") {
+  //     player.play("walk-up");
+  //   }
+  //   player.move(0, -player.speed);
+  //   return;
+  // }
+  // if (player.direction === "down") {
+  //   if (player.curAnim() !== "walk-down") {
+  //     player.play("walk-down");
+  //   }
+  //   player.move(0, player.speed);
+  //   return;
+  // }
+  // if (player.direction === "diagonal-top-right") {
+  //   player.flipX = false;
+  //   if (player.curAnim() !== "walk-side") {
+  //     player.play("walk-side");
+  //   }
+  //   player.move(player.speed / 2, -player.speed / 2);
+  //   return;
+  // }
+  // if (player.direction === "diagonal-top-left") {
+  //   player.flipX = true;
+  //   if (player.curAnim() !== "walk-side") {
+  //     player.play("walk-side");
+  //   }
+  //   player.move(-player.speed / 2, -player.speed / 2);
+  //   return;
+  // }
+  // if (player.direction === "diagonal-bottom-left") {
+  //   player.flipX = true;
+  //   if (player.curAnim() !== "walk-side") {
+  //     player.play("walk-side");
+  //   }
+  //   player.move(-player.speed / 2, player.speed / 2);
+  //   return;
+  // }
+  // if (player.direction === "diagonal-bottom-right") {
+  //   player.flipX = false;
+  //   if (player.curAnim() !== "walk-side") {
+  //     player.play("walk-side");
+  //   }
+  //   player.move(player.speed / 2, player.speed / 2);
+  //   return;
+  // }
 });
 
 k.onMouseRelease(() => {
