@@ -65,116 +65,6 @@ document.getElementById("close").addEventListener("click", () => {
   dialogue.innerText = "";
 });
 
-// const leftZone = player.add([
-//   k.pos(-k.width() / 2, -8),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   "controlZone",
-// ]);
-
-// leftZone.onHover(() => {
-//   player.direction = "left";
-// });
-
-// const rightZone = player.add([
-//   k.pos(0, -8),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), k.width() / 2, 16),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   "controlZone",
-// ]);
-
-// rightZone.onHover(() => {
-//   player.direction = "right";
-// });
-
-// const topZone = player.add([
-//   k.pos(0, -158),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), 16, 300),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   k.anchor("center"),
-//   "controlZone",
-// ]);
-
-// topZone.onHover(() => {
-//   player.direction = "up";
-// });
-
-// const topDiagonalRight = player.add([
-//   k.pos(10, -10),
-//   k.rotate(270),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   "controlZone",
-// ]);
-
-// topDiagonalRight.onHover(() => {
-//   player.direction = "diagonal-top-right";
-// });
-
-// const topDiagonalLeft = player.add([
-//   k.pos(-10, -10),
-//   k.rotate(180),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   "controlZone",
-// ]);
-
-// topDiagonalLeft.onHover(() => {
-//   player.direction = "diagonal-top-left";
-// });
-
-// const bottomDiagonalLeft = player.add([
-//   k.pos(-10, 10),
-//   k.rotate(90),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   "controlZone",
-// ]);
-
-// bottomDiagonalLeft.onHover(() => {
-//   player.direction = "diagonal-bottom-left";
-// });
-
-// const bottomDiagonalRight = player.add([
-//   k.pos(10, 10),
-//   k.rotate(0),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), k.width() / 2, 300),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   "controlZone",
-// ]);
-
-// bottomDiagonalRight.onHover(() => {
-//   player.direction = "diagonal-bottom-right";
-// });
-
-// const bottomZone = player.add([
-//   k.pos(0, 158),
-//   k.area({
-//     shape: new k.Rect(k.vec2(0), 16, 300),
-//     collisionIgnore: ["controlZone", "player"],
-//   }),
-//   k.anchor("center"),
-//   "controlZone",
-// ]);
-
-// bottomZone.onHover(() => {
-//   player.direction = "down";
-// });
-
 function setCamScale(k) {
   const resizeFactor = k.width() / k.height();
   if (resizeFactor < 1) {
@@ -215,7 +105,6 @@ k.onMouseDown(() => {
   player.moveTo(worldMousePos, player.speed);
 
   const mouseAngle = player.pos.angle(worldMousePos);
-  k.debug.log(mouseAngle);
 
   if (mouseAngle > 80 && mouseAngle < 95 && player.curAnim() !== "walk-up") {
     player.play("walk-up");
@@ -233,16 +122,16 @@ k.onMouseDown(() => {
     return;
   }
 
-  if (Math.abs(mouseAngle) > 95 && player.curAnim() !== "walk-side") {
+  if (Math.abs(mouseAngle) > 95) {
     player.flipX = false;
-    player.play("walk-side");
+    if (player.curAnim() !== "walk-side") player.play("walk-side");
     player.direction = "right";
     return;
   }
 
-  if (Math.abs(mouseAngle) < 80 && player.curAnim() !== "walk-side") {
+  if (Math.abs(mouseAngle) < 80) {
     player.flipX = true;
-    player.play("walk-side");
+    if (player.curAnim() !== "walk-side") player.play("walk-side");
     player.direction = "left";
     return;
   }
