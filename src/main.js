@@ -37,14 +37,13 @@ const player = k.add([
 const dialogueManager = {};
 
 player.onCollide("npc", () => {
-  k.debug.log("collided");
   player.isInDialogue = true;
   const dialogueUI = document.getElementById("textbox-ui");
   const dialogue = document.getElementById("dialogue");
 
   dialogueUI.style.display = "block";
   const text =
-    "The text box you're currently reading is not rendered withing canvas!\nIt's made with html and css!";
+    "The text box you're currently reading is not rendered within canvas!\nIt's made with html and css!";
   let index = 0;
   dialogueManager.intervalRef = setInterval(() => {
     if (index < text.length) {
@@ -54,15 +53,14 @@ player.onCollide("npc", () => {
     }
 
     clearInterval(dialogueManager.intervalRef);
-  }, 10);
-});
+  }, 5);
 
-document.getElementById("close").addEventListener("click", () => {
-  player.isInDialogue = false;
-  const dialogueUI = document.getElementById("textbox-ui");
-  const dialogue = document.getElementById("dialogue");
-  dialogueUI.style.display = "none";
-  dialogue.innerText = "";
+  document.getElementById("close").addEventListener("click", () => {
+    player.isInDialogue = false;
+    dialogueUI.style.display = "none";
+    dialogue.innerHTML = "";
+    clearInterval(dialogueManager.intervalRef);
+  });
 });
 
 function setCamScale(k) {
@@ -95,7 +93,6 @@ k.onResize(() => {
 
 k.onUpdate(() => {
   k.camPos(player.pos.x, player.pos.y - 100);
-  // k.debug.log(k.toWorld(k.mousePos()));
 });
 
 k.onMouseDown(() => {
