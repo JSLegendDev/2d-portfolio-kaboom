@@ -147,7 +147,6 @@ k.scene("main", async () => {
     if (player.isInDialogue) return;
 
     const worldMousePos = k.toWorld(k.mousePos());
-    console.log(worldMousePos);
     player.moveTo(worldMousePos, player.speed);
 
     const mouseAngle = player.pos.angle(worldMousePos);
