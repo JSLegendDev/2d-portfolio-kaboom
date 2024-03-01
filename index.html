@@ -8,17 +8,21 @@
   </head>
   <body>
     <style>
+      @font-face {
+        font-family: monogram;
+        src: url(monogram.ttf);
+      }
+
       body {
-        font-family: "Sora", monospace;
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        overflow: hidden;
       }
 
       #app {
         width: 100%;
         height: 100%;
         position: relative;
-      }
-
-      #ui {
       }
 
       #textbox {
@@ -36,36 +40,47 @@
         flex-wrap: wrap;
         justify-content: flex-start;
         align-items: flex-start;
-        font-size: 1.5rem;
         word-spacing: 0.2rem;
         filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
         /* overflow: auto; */
       }
 
-      #dialogue {
+      .ui-text {
         margin: 0;
         user-select: none;
       }
 
-      #close {
+      .ui-close-btn {
+        font-family: monogram, monospace;
         border-style: none;
         border-radius: 3px;
         padding: 1rem;
-        font-size: 1.2rem;
+        font-size: inherit;
       }
 
       .btn-container {
         align-self: flex-end;
         margin-top: 1rem;
       }
+
+      .note {
+        position: absolute;
+        left: 5%;
+        top: 1vh;
+        display: flex;
+        flex-direction: column;
+        color: rgb(238, 238, 238);
+      }
     </style>
     <div id="app">
       <div id="ui">
-        <div id="textbox-ui" style="display: none">
+        <p class="note">Tap/Click around to move</p>
+
+        <div id="textbox-container" style="display: none">
           <div id="textbox">
-            <p id="dialogue"></p>
+            <p id="dialogue" class="ui-text"></p>
             <div class="btn-container">
-              <button id="close">Close</button>
+              <button id="close" class="ui-close-btn">Close</button>
             </div>
           </div>
         </div>

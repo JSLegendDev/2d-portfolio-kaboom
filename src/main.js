@@ -28,7 +28,7 @@ k.scene("main", async () => {
     k.sprite("spritesheet", { anim: "idle-down" }),
     k.area({
       collisionIgnore: ["controlZone"],
-      shape: new k.Rect(k.vec2(0), 12, 16),
+      shape: new k.Rect(k.vec2(0, 1), 12, 14),
     }),
     k.body(),
     k.anchor("center"),
@@ -86,7 +86,7 @@ k.scene("main", async () => {
 
   player.onCollide("npc", () => {
     player.isInDialogue = true;
-    const dialogueUI = document.getElementById("textbox-ui");
+    const dialogueUI = document.getElementById("textbox-container");
     const dialogue = document.getElementById("dialogue");
 
     dialogueUI.style.display = "block";
@@ -151,15 +151,22 @@ k.scene("main", async () => {
 
     const mouseAngle = player.pos.angle(worldMousePos);
 
-    if (mouseAngle > 80 && mouseAngle < 95 && player.curAnim() !== "walk-up") {
+    const lowerBound = 70;
+    const upperBound = 105;
+
+    if (
+      mouseAngle > lowerBound &&
+      mouseAngle < upperBound &&
+      player.curAnim() !== "walk-up"
+    ) {
       player.play("walk-up");
       player.direction = "up";
       return;
     }
 
     if (
-      mouseAngle < -80 &&
-      mouseAngle > -95 &&
+      mouseAngle < -lowerBound &&
+      mouseAngle > -upperBound &&
       player.curAnim() !== "walk-down"
     ) {
       player.play("walk-down");
@@ -167,14 +174,14 @@ k.scene("main", async () => {
       return;
     }
 
-    if (Math.abs(mouseAngle) > 95) {
+    if (Math.abs(mouseAngle) > upperBound) {
       player.flipX = false;
       if (player.curAnim() !== "walk-side") player.play("walk-side");
       player.direction = "right";
       return;
     }
 
-    if (Math.abs(mouseAngle) < 80) {
+    if (Math.abs(mouseAngle) < lowerBound) {
       player.flipX = true;
       if (player.curAnim() !== "walk-side") player.play("walk-side");
       player.direction = "left";
