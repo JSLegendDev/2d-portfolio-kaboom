@@ -1,6 +1,6 @@
 import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
-import { displayDialogue } from "./utils";
+import { displayDialogue, setCamScale } from "./utils";
 
 k.loadSprite("spritesheet", "./spritesheet.png", {
   sliceX: 39,
@@ -83,28 +83,6 @@ k.scene("main", async () => {
     }
   }
 
-  function setCamScale(k) {
-    const resizeFactor = k.width() / k.height();
-    if (resizeFactor < 1) {
-      k.camScale(k.vec2(1));
-    } else {
-      k.camScale(k.vec2(1.5));
-    }
-  }
-
-  function setAnimToIdle() {
-    if (player.direction === "down") {
-      player.play("idle-down");
-      return;
-    }
-    if (player.direction === "up") {
-      player.play("idle-up");
-      return;
-    }
-
-    player.play("idle-side");
-  }
-
   setCamScale(k);
 
   k.onResize(() => {
@@ -162,7 +140,16 @@ k.scene("main", async () => {
   });
 
   k.onMouseRelease(() => {
-    setAnimToIdle();
+    if (player.direction === "down") {
+      player.play("idle-down");
+      return;
+    }
+    if (player.direction === "up") {
+      player.play("idle-up");
+      return;
+    }
+
+    player.play("idle-side");
   });
 });
 

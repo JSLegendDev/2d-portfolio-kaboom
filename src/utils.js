@@ -28,3 +28,12 @@ export function displayDialogue(text, onDisplayEnd) {
 
   closeBtn.addEventListener("click", onCloseBtnClick);
 }
+
+export function setCamScale(k) {
+  const resizeFactor = k.width() / k.height();
+  if (resizeFactor < 1) {
+    k.camScale(k.vec2(1));
+  } else {
+    k.camScale(k.vec2(1.5));
+  }
+}
