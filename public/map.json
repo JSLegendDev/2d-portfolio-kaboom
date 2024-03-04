@@ -93,7 +93,7 @@
                 {
                  "height":16,
                  "id":2,
-                 "name":"",
+                 "name":"exit",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -324,13 +324,13 @@
                 {
                  "height":10.375,
                  "id":33,
-                 "name":"desk",
+                 "name":"resume",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":29.9375,
-                 "x":225.1875,
-                 "y":80.25
+                 "width":14.25,
+                 "x":225.53125,
+                 "y":80.0625
                 }, 
                 {
                  "height":7.03125,
@@ -342,6 +342,17 @@
                  "width":11.75,
                  "x":274.125,
                  "y":80.125
+                }, 
+                {
+                 "height":9.90625,
+                 "id":35,
+                 "name":"projects",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":13.25,
+                 "x":240.34375,
+                 "y":80.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -373,7 +384,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":35,
+ "nextobjectid":36,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

@@ -123,8 +123,8 @@ k.scene("main", async () => {
 
     const mouseAngle = player.pos.angle(worldMousePos);
 
-    const lowerBound = 65;
-    const upperBound = 110;
+    const lowerBound = 50;
+    const upperBound = 125;
 
     if (
       mouseAngle > lowerBound &&
