@@ -4,9 +4,11 @@ export function displayDialogue(text, onDisplayEnd) {
 
   dialogueUI.style.display = "block";
   let index = 0;
+  let currentText = "";
   const intervalRef = setInterval(() => {
     if (index < text.length) {
-      dialogue.innerHTML += text[index];
+      currentText += text[index];
+      dialogue.innerHTML = currentText;
       index++;
       return;
     }

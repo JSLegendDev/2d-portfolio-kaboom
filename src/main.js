@@ -29,7 +29,7 @@ k.scene("main", async () => {
     k.sprite("spritesheet", { anim: "idle-down" }),
     k.area({
       collisionIgnore: ["controlZone"],
-      shape: new k.Rect(k.vec2(0, 3), 10, 14),
+      shape: new k.Rect(k.vec2(0, 3), 10, 10),
     }),
     k.body(),
     k.anchor("center"),
@@ -41,15 +41,6 @@ k.scene("main", async () => {
       isInDialogue: false,
     },
     "player",
-  ]);
-
-  const npcTest = k.make([
-    k.rect(50, 50),
-    k.outline(3),
-    k.area(),
-    k.body({ isStatic: true }),
-    k.pos(),
-    "npc",
   ]);
 
   for (const layer of layers) {
@@ -132,8 +123,8 @@ k.scene("main", async () => {
 
     const mouseAngle = player.pos.angle(worldMousePos);
 
-    const lowerBound = 70;
-    const upperBound = 105;
+    const lowerBound = 65;
+    const upperBound = 110;
 
     if (
       mouseAngle > lowerBound &&
