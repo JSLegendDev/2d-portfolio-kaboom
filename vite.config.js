@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "https://jslegenddev.github.io/2d-portfolio-kaboom/",
+  base: "./",
   build: {
     minify: "terser",
   },
