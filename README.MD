@@ -12,6 +12,8 @@ Watch the tutorial I made on how to build this on YouTube : https://www.youtube.
 
 # How to run
 
+Note: You need `Node.js` and `npm` installed on your machine.
+
 `npm install` then `npm run dev`
 
 # How to build
