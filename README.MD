@@ -28,5 +28,4 @@ Note: You need `Node.js` and `npm` installed on your machine.
 
 # How to host?
 
-Once the project is built. Take the content of the dist folder and drag and drop it
-to your favorite static site hosting provider.
+Here is a [guide](HOW_TO_DEPLOY.MD).
