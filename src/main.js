@@ -205,4 +205,6 @@ k.scene("main", async () => {
   });
 });
 
+k.debug.inspect = true
+
 k.go("main");
