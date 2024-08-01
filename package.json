@@ -1,0 +1,18 @@
+{
+  "name": "2d-portfolio-kaboom",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "terser": "^5.31.3",
+    "vite": "^5.3.4"
+  },
+  "dependencies": {
+    "kaboom": "^3000.1.17"
+  }
+}
