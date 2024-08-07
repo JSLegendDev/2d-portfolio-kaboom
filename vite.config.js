@@ -5,4 +5,4 @@ export default defineConfig({
   build: {
     minify: "terser",
   },
-});
+})
