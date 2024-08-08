@@ -17,7 +17,7 @@ export const dialogueData = {
 
     projects: `terminar <a href="https://youtube.com/@jslegenddev" target="_blank">here</a>.`,
 
-    library: `pli pli pli`,
+    library: `estoy cieguito de tu amor`,
 
     exit: `Si queres cerrar esta ventana, apretá CLOSE`,
 
