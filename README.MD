@@ -29,3 +29,6 @@ Note: You need `Node.js` and `npm` installed on your machine.
 # How to host?
 
 Here is a [guide](HOW_TO_DEPLOY.MD).
+
+# NEW! I made a new developer portfolio as a 2D game!
+Check out the new tutorial here : https://www.youtube.com/watch?v=OejpBl2s9OY
